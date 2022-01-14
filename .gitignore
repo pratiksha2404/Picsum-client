@@ -12,3 +12,12 @@ gradle-app.setting
 
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
 # gradle/wrapper/gradle-wrapper.properties
+/.idea/.name
+/.idea/gradle.xml
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/modules/Picsum-client.iml
+/.idea/vcs.xml
+/.idea/compiler.xml
+/.idea/.gitignore
+/app/.gitignore
