@@ -1,12 +1,14 @@
 package com.pratiksha.picsumclone.data
 
-class ImageRepository {
+interface ImageRepository {
+    suspend fun fetchImages(): List<ImageData>
+}
 
-    fun fetchImages(): List<ImageData> {
-        val imageData = ImageData("123", "qwdq", 1, 2,"1231", "1231")
+class ImageRepositoryImpl(val picsumService: PicsumService) : ImageRepository {
 
-        //TODO: use retrofit to make actual api call and return data
-        return listOf(imageData, imageData, imageData)
+    override suspend fun fetchImages(): List<ImageData> {
+
+        return picsumService.getImageList(0, 0)
     }
 
 }

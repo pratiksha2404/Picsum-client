@@ -9,8 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.pratiksha.picsumclone.data.ImageRepository
+import com.pratiksha.picsumclone.data.ImageRepositoryImpl
+import com.pratiksha.picsumclone.data.PicsumService
 import com.pratiksha.picsumclone.databinding.MainFragmentBinding
 import com.pratiksha.picsumclone.domain.FetchImagesUseCase
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class MainFragment : Fragment() {
 
@@ -20,7 +24,13 @@ class MainFragment : Fragment() {
         fun newInstance() = MainFragment()
     }
 
-    private val imageRepository = ImageRepository()
+    private val retrofit = Retrofit.Builder().baseUrl("https://picsum.photos/v2/")
+        .addConverterFactory(GsonConverterFactory.create())
+        .build();
+
+    private val picsumService = retrofit.create(PicsumService::class.java)
+
+    private val imageRepository = ImageRepositoryImpl(picsumService)
     private val fetchImagesUseCase = FetchImagesUseCase(imageRepository)
 
     private lateinit var viewModel: MainViewModel
